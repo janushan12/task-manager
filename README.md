@@ -19,7 +19,6 @@ A full stack Task Manager web application built with **Angular 21** (frontend) a
 - [Running With Docker Compose](#running-with-docker-compose)
 - [API Endpoints](#api-endpoints)
 - [Authentication](#authentication)
-- [Screenshots](#screenshots)
 - [Evaluation Criteria](#evaluation-criteria)
 
 ---

@@ -19,7 +19,6 @@ A full stack Task Manager web application built with **Angular 21** (frontend) a
 - [Running With Docker Compose](#running-with-docker-compose)
 - [API Endpoints](#api-endpoints)
 - [Authentication](#authentication)
-- [Evaluation Criteria](#evaluation-criteria)
 
 ---
 
@@ -271,20 +270,6 @@ public class Task {
 | `TO_DO`       | To Do        |
 | `IN_PROGRESS` | In Progress  |
 | `DONE`        | Done         |
-
----
-
-## Evaluation Criteria
-
-| Area            | Implementation                                                                 |
-|-----------------|--------------------------------------------------------------------------------|
-| Angular         | Standalone components, Signals, @if/@for, Reactive Forms, route guards         |
-| Spring Boot     | REST controllers, service layer, repository pattern, exception handling        |
-| Database        | MySQL 8, JPA entities, Hibernate DDL auto-update                               |
-| Code Quality    | Modular structure, DTOs, service layer separation, meaningful naming           |
-| Bonus: JWT Auth | Spring Security + JJWT, filter chain, Angular interceptor, auth guard          |
-| Bonus: Docker   | Multi-stage Dockerfiles, Docker Compose, nginx reverse proxy, healthchecks     |
-| Git & README    | This README with full setup instructions, API docs, and credentials            |
 
 ---
 

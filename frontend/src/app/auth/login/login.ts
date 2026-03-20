@@ -8,8 +8,6 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
-    // RouterLink,
-    // NgClass
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

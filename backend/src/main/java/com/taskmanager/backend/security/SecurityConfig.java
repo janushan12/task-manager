@@ -24,13 +24,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                // ✅ Fix 1 — use the corsConfigurationSource bean, not a lambda
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        // ✅ Fix 2 — explicitly permit ALL OPTIONS requests (preflight)
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
@@ -42,18 +40,14 @@ public class SecurityConfig {
                 .build();
     }
 
-    // ✅ Fix 3 — bean must be named exactly "corsConfigurationSource"
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // ✅ Fix 4 — be explicit about allowed origin
         config.setAllowedOrigins(List.of("http://localhost:4200"));
 
-        // ✅ Fix 5 — include OPTIONS in allowed methods
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
-        // ✅ Fix 6 — allow Authorization header explicitly
         config.setAllowedHeaders(List.of(
                 "Authorization",
                 "Content-Type",
@@ -62,12 +56,10 @@ public class SecurityConfig {
                 "X-Requested-With"
         ));
 
-        // ✅ Fix 7 — expose Authorization header to the browser
         config.setExposedHeaders(List.of("Authorization"));
 
         config.setAllowCredentials(true);
 
-        // ✅ Fix 8 — cache preflight for 1 hour (reduces OPTIONS calls)
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

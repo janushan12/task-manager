@@ -14,7 +14,8 @@ interface AuthResponse {
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private apiUrl = 'http://localhost:8080/api/auth';
+  // private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = '/api/auth';
 
   isLoggedIn = signal<boolean>(this.hasToken());
   currentUser = signal<string>(this.getStoredUser() ?? '');

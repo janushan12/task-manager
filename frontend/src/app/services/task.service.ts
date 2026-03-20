@@ -8,7 +8,8 @@ import { Observable, tap } from 'rxjs';
 })
 export class TaskService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/tasks';
+  // private apiUrl = 'http://localhost:8080/api/tasks';
+  private apiUrl = '/api/tasks';
 
   private _tasks = signal<Task[]>([]);
 

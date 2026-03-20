@@ -1,0 +1,49 @@
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: taskflow-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootpassword"
+      MYSQL_DATABASE: "taskdb"
+      MYSQL_USER: "taskuser"
+      MYSQL_PASSWORD: "taskpass"
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-utaskuser", "-ptaskpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: taskflow-backend
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/taskdb"
+      SPRING_DATASOURCE_USERNAME: "taskuser"
+      SPRING_DATASOURCE_PASSWORD: "taskpass"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      APP_JWT_SECRET: "taskflow-super-secret-key-must-be-at-least-256-bits-long-2024"
+      APP_JWT_EXPIRATION: "86400000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: taskflow-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

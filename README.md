@@ -296,8 +296,8 @@ public class Task {
 | Variable                        | Default Value                                      | Description              |
 |---------------------------------|----------------------------------------------------|--------------------------|
 | SPRING_DATASOURCE_URL           | jdbc:mysql://localhost:3306/taskdb                 | MySQL connection URL      |
-| SPRING_DATASOURCE_USERNAME      | taskuser                                           | MySQL username            |
-| SPRING_DATASOURCE_PASSWORD      | taskpass                                           | MySQL password            |
+| SPRING_DATASOURCE_USERNAME      | db_user_name                                       | MySQL username            |
+| SPRING_DATASOURCE_PASSWORD      | db_user_pass                                       | MySQL password            |
 | APP_JWT_SECRET                  | taskflow-super-secret-key-...                      | JWT signing secret        |
 | APP_JWT_EXPIRATION              | 86400000                                           | Token expiry in ms        |
 

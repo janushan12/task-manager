@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <mat-icon>task_alt</mat-icon>
+  <span class="brand">TaskFlow</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/tasks" routerLinkActive="active-link">
+    Tasks
+  </button>
+  <button mat-raised-button routerLink="/tasks/new">
+    + New Task
+  </button>
+</mat-toolbar>
+<router-outlet />

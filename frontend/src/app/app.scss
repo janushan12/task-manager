@@ -1,0 +1,17 @@
+.app-toolbar {
+    gap: 12px;
+}
+
+.brand {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.active-link {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}

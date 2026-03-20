@@ -1,0 +1,98 @@
+<div class="form-page">
+  <div class="form-wrap">
+    <a class="back-link" routerLink="/tasks">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Tasks
+    </a>
+
+    <div class="form-card">
+      <div class="form-header">
+        <div class="form-icon">
+          @if (isEdit()) {
+            <svg viewBox="0 0 20 20" fill="none"><path d="M14 2l4 4L6 18H2v-4L14 2z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          } @else {
+            <svg viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          }
+        </div>
+        <div>
+          <h2 class="form-title">{{ isEdit() ? 'Edit Task' : 'New Task' }}</h2>
+          <p class="form-subtitle">{{ isEdit() ? 'Update the task details below' : 'Fill in the details to create a task' }}</p>
+        </div>
+      </div>
+
+      @if (loading() && isEdit()) {
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading task...</p>
+        </div>
+      }
+
+      @if (!loading() || !isEdit()) {
+        <form [formGroup]="form" (ngSubmit)="submit()" class="form-body">
+
+          <div class="field-group" [class.has-error]="titleCtrl.touched && titleCtrl.invalid">
+            <label class="field-label">
+              Title <span class="required">*</span>
+            </label>
+            <input class="field-input"
+                   formControlName="title"
+                   placeholder="Enter task title..."
+                   maxlength="80" />
+            <div class="field-footer">
+              @if (titleCtrl.touched && titleError) {
+                <span class="field-error">{{ titleError }}</span>
+              } @else {
+                <span></span>
+              }
+              <span class="char-count" [class.near-limit]="titleCtrl.value.length > 60">
+                {{ titleCtrl.value.length }}/80
+              </span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Description</label>
+            <textarea class="field-input field-textarea"
+                      formControlName="description"
+                      placeholder="Add an optional description..."
+                      maxlength="300"
+                      rows="4">
+            </textarea>
+            <div class="field-footer">
+              <span></span>
+              <span class="char-count" [class.near-limit]="descCtrl.value.length > 240">
+                {{ descCtrl.value.length }}/300
+              </span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Status</label>
+            <div class="status-options">
+              @for (s of statuses; track s) {
+                <label class="status-option" [class.selected]="form.controls.status.value === s">
+                  <input type="radio" formControlName="status" [value]="s" hidden />
+                  <span class="status-dot" [ngClass]="'dot-' + s.toLowerCase().replace('_', '-')"></span>
+                  {{ statusLabel(s) }}
+                </label>
+              }
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a class="btn-ghost" routerLink="/tasks">Cancel</a>
+            <button class="btn-submit" type="submit" [disabled]="loading()">
+              @if (loading()) {
+                <span class="btn-spinner"></span>
+              } @else {
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              }
+              {{ isEdit() ? 'Update Task' : 'Create Task' }}
+            </button>
+          </div>
+
+        </form>
+      }
+    </div>
+  </div>
+</div>

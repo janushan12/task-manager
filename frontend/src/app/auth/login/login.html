@@ -1,0 +1,50 @@
+<div class="login-page">
+    <div class="login-card">
+        <div class="login-logo">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16M4 10h10M4 14h7" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            TaskFlow
+        </div>
+        <h2>{{ mode() === 'login' ? 'Welcome back' : 'Create account' }}</h2>
+        <p class="subtitle">{{ mode() === 'login' ? 'Sign in to continue' : 'Start managing your tasks' }}</p>
+        @if (error()) {
+        <div class="error-banner">{{ error() }}</div>
+        }
+        <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+            <div class="field" [class.has-error]="usernameCtrl.touched && usernameCtrl.invalid">
+                <label>Username</label>
+                <input formControlName="username" placeholder="Enter username" autocomplete="username" />
+                @if (usernameCtrl.touched && usernameCtrl.errors?.['required']) {
+                <span class="field-err">Username is required</span>
+                }
+                @if (usernameCtrl.touched && usernameCtrl.errors?.['minlength']) {
+                <span class="field-err">At least 3 characters</span>
+                }
+            </div>
+
+            <div class="field" [class.has-error]="passwordCtrl.touched && passwordCtrl.invalid">
+                <label>Password</label>
+                <input formControlName="password" type="password" placeholder="Enter 
+password" autocomplete="current-password" />
+                @if (passwordCtrl.touched && passwordCtrl.errors?.['required']) {
+                <span class="field-err">Password is required</span>
+                }
+                @if (passwordCtrl.touched && passwordCtrl.errors?.['minlength']) {
+                <span class="field-err">At least 6 characters</span>
+                }
+            </div>
+            <button class="btn-login" type="submit" [disabled]="loading()">
+                @if (loading()) { <span class="spinner"></span> }
+                {{ mode() === 'login' ? 'Sign In' : 'Create Account' }}
+            </button>
+        </form>
+        <p class="toggle-text">
+            {{ mode() === 'login' ? 'No account?' : 'Already have an account?' }}
+            <button class="toggle-link" (click)="toggleMode()">
+                {{ mode() === 'login' ? 'Register' : 'Sign In' }}
+            </button>
+        </p>
+
+    </div>
+</div>

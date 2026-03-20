@@ -1,0 +1,35 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary:    mat.$azure-palette,
+    tertiary:   mat.$cyan-palette,
+  ),
+  typography: (
+    brand-family: 'Inter, system-ui, sans-serif',
+    plain-family: 'Inter, system-ui, sans-serif',
+  ),
+));
+
+html {
+  @include mat.all-component-themes($theme);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f4f6f8;
+  color: #1a1a1a;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 0 !important;
+}
+
+.snack-success .mdc-snackbar__surface { background: #085041 !important; }
+
+.snack-error .mdc-snackbar__surface   { background: #a32d2d !important; }

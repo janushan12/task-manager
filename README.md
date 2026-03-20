@@ -293,8 +293,8 @@ public class Task {
 
 ### Backend (set in docker-compose.yml or application.properties)
 
-| Variable                        | Default Value                                      | Description              |
-|---------------------------------|----------------------------------------------------|--------------------------|
+| Variable                        | Default Value                                      | Description               |
+|---------------------------------|----------------------------------------------------|---------------------------|
 | SPRING_DATASOURCE_URL           | jdbc:mysql://localhost:3306/taskdb                 | MySQL connection URL      |
 | SPRING_DATASOURCE_USERNAME      | db_user_name                                       | MySQL username            |
 | SPRING_DATASOURCE_PASSWORD      | db_user_pass                                       | MySQL password            |
